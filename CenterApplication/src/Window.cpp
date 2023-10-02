@@ -9,7 +9,8 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	// Close the window
 	case WM_CLOSE:
-		DestroyWindow(hWnd);
+		/*DestroyWindow(hWnd);*/
+		ShowWindow(hWnd, SW_HIDE);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
