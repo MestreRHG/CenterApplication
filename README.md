@@ -22,6 +22,7 @@ FAQ
 What the hell is this icon?
 -----------
 I don't know, made in 1 minute on Paint
+Add support for other OS
 
 What is your experience?
 -----------
