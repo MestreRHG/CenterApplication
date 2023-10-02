@@ -6,6 +6,18 @@
 
 int main()
 {
+	HANDLE m_singleInstanceMutex = CreateMutex(NULL, TRUE, L"WindowRecentered");
+	if (GetLastError() == ERROR_ALREADY_EXISTS)
+	{
+		HWND existingApp = FindWindow(0, L"Window Recenter");
+		if (existingApp)
+		{
+			SetForegroundWindow(existingApp);
+			ShowWindow(existingApp, SW_SHOW);
+		}
+		return 1;
+	}
+
 	std::cout << "Creating Window\n";
 
 	// Pointer to a new window
