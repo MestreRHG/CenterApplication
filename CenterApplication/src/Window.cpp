@@ -98,6 +98,7 @@ Window::Window() : m_hInstance(GetModuleHandle(nullptr))
 
 Window::~Window()
 {
+	Shell_NotifyIcon(NIM_DELETE, &nid);
 	UnregisterClass(CLASS_NAME, m_hInstance);
 }
 
@@ -132,7 +133,6 @@ bool Window::MessageLoop()
 void Window::CreateShellNotification()
 {
 	// Create the notification information
-	NOTIFYICONDATA nid = {};
 	nid.cbSize = sizeof(nid);
 	nid.hWnd = hWnd;
 	nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP | NIF_SHOWTIP;

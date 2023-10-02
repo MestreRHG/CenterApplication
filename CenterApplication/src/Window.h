@@ -36,6 +36,8 @@ private:
 	HINSTANCE m_hInstance;
 	// Window
 	HWND hWnd;
+	// Notification
+	NOTIFYICONDATA nid = {};
 
 	// Window's class
 	const wchar_t* CLASS_NAME = L"Sample Window Class";
