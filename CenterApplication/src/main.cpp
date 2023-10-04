@@ -6,16 +6,18 @@
 
 int main()
 {
+	// Create a mutex to see if the app is already running
 	HANDLE m_singleInstanceMutex = CreateMutex(NULL, TRUE, L"WindowRecentered");
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
+		// Get the window, show it and bring it to focus
 		HWND existingApp = FindWindow(0, L"Window Recenter");
 		if (existingApp)
 		{
 			SetForegroundWindow(existingApp);
 			ShowWindow(existingApp, SW_SHOW);
 		}
-		return 1;
+		return 0;
 	}
 
 	std::cout << "Creating Window\n";

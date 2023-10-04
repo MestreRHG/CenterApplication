@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../resource.h"
+#include "Settings.h"
 #include <Windows.h>
 #include <shellapi.h>
 #include <strsafe.h>
@@ -38,6 +39,8 @@ private:
 	HWND hWnd;
 	// Notification
 	NOTIFYICONDATA nid = {};
+	// Settings
+	Settings* settings;
 
 	// Window's class
 	const wchar_t* CLASS_NAME = L"Sample Window Class";

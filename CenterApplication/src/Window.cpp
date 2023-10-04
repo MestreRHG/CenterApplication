@@ -93,12 +93,17 @@ Window::Window() : m_hInstance(GetModuleHandle(nullptr))
 	// Create the notification icon
 	CreateShellNotification();
 
+	// Read the settings file
+	settings = new Settings("./settings.ini");
+	settings->Read();
+
 	// Hide the window
 	ShowWindow(hWnd, SW_HIDE);
 }
 
 Window::~Window()
 {
+	delete settings;
 	Shell_NotifyIcon(NIM_DELETE, &nid);
 	UnregisterClass(CLASS_NAME, m_hInstance);
 }
@@ -106,7 +111,7 @@ Window::~Window()
 bool Window::MessageLoop()
 {
 	// Register the shortcut
-	if (RegisterHotKey(hWnd, 1, MOD_ALT | MOD_NOREPEAT, 0x42))  //0x42 is 'b'
+	if (RegisterHotKey(hWnd, 1, MOD_ALT | MOD_NOREPEAT, (int)Keybind::VK_B))
 	{
 		std::cout << "Hotkey 'ALT+b' registered, using MOD_NOREPEAT flag\n";
 	}
