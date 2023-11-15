@@ -1,6 +1,5 @@
 #include "Window.h"
-#if _DEBUG
-#else
+#ifndef _DEBUG
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #endif
 

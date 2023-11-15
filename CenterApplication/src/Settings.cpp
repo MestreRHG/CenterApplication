@@ -56,6 +56,15 @@ void Settings::Read()
 			// Monitor mode
 		case 0:
 			std::cout << "Monitor mode = " << s << '\n';
+			if (s == "0")
+				monitorMode = (int)MonitorMode::bothMonitors;
+			else if(s == "1")
+				monitorMode = (int)MonitorMode::onlyPrimary;
+			else
+			{
+				std::cout << "Error reading the value of monitor mode!";
+				monitorMode = (int)MonitorMode::bothMonitors;
+			}
 			break;
 			// KeyBind
 		case 1:

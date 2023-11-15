@@ -47,4 +47,7 @@ private:
 
 	// Create the notification icon
 	void CreateShellNotification();
+
+	// Center the app
+	void CenterApplicationOnFocus();
 };

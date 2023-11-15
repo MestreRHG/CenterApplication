@@ -161,7 +161,7 @@ void Window::CreateShellNotification()
 		Shell_NotifyIcon(NIM_SETVERSION, &nid);
 }
 
-void CenterApplicationOnFocus()
+void Window::CenterApplicationOnFocus()
 {
 	// Get the window that's on focus
 	HWND focusApp = GetForegroundWindow();
@@ -185,8 +185,17 @@ void CenterApplicationOnFocus()
 	RECT rectWindow;
 	GetWindowRect(focusApp, &rectWindow);
 	int posx, posy;
-	posx = (monitorInfo.rcWork.left + monitorInfo.rcWork.right) / 2 - (rectWindow.right - rectWindow.left) / 2;
-	posy = (monitorInfo.rcWork.top + monitorInfo.rcWork.bottom) / 2 - (rectWindow.bottom - rectWindow.top) / 2;
+
+	std::cout << settings->monitorMode << '\n';
+
+	if (settings->monitorMode == (int)MonitorMode::bothMonitors) {
+		posx = (monitorInfo.rcWork.left + monitorInfo.rcWork.right) / 2 - (rectWindow.right - rectWindow.left) / 2;
+		posy = (monitorInfo.rcWork.top + monitorInfo.rcWork.bottom) / 2 - (rectWindow.bottom - rectWindow.top) / 2;
+	}
+	else {
+		posx = GetSystemMetrics(SM_CXSCREEN) / 2 - (rectWindow.right - rectWindow.left) / 2;
+		posy = GetSystemMetrics(SM_CYSCREEN) / 2 - (rectWindow.bottom - rectWindow.top) / 2;
+	}
 
 	MoveWindow(focusApp, posx, posy, rectWindow.right - rectWindow.left, rectWindow.bottom - rectWindow.top, TRUE);
 }
