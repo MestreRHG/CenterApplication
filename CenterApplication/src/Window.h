@@ -15,7 +15,6 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-void CenterApplicationOnFocus();
 bool isFullscreen(HWND* appToCheck, MONITORINFO monitorInfo);
 bool isMaximized(HWND* appToCheck);
 
@@ -32,22 +31,26 @@ public:
 
 	// Loop throw messages
 	bool MessageLoop();
+
+// Window
 private:
-	// Instance of the window
-	HINSTANCE m_hInstance;
 	// Window
 	HWND hWnd;
-	// Notification
-	NOTIFYICONDATA nid = {};
 	// Settings
 	Settings* settings;
-
+	// Instance of the window
+	HINSTANCE m_hInstance;
 	// Window's class
 	const wchar_t* CLASS_NAME = L"Sample Window Class";
 
+	// Center the app
+	void CenterApplicationOnFocus();
+
+// Shell Notification
+private:
 	// Create the notification icon
 	void CreateShellNotification();
 
-	// Center the app
-	void CenterApplicationOnFocus();
+	// Notification
+	NOTIFYICONDATA nid = {};
 };

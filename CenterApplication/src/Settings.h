@@ -106,24 +106,29 @@ const enum class Keybind {
 };
 
 class Settings {
+// Class functions
 public:
 	Settings(const std::string& pathName);
-	~Settings();
 
 	Settings(const Settings&) = delete;
 	void operator=(const Settings&) = delete;
 
+// Read and Write
+public:
 	// Write setting
 	void Write();
 	// Read settings
 	void Read();
 
+// Settings read
+public:
 	// 0 - Use both monitors
 	// 1 - Use only primary
 	int monitorMode;
 	// Key used in combination with ALT to center the focused app
 	int keyBind;
 
+// Other functions
 private:
 	// Write default settings
 	void WriteDefault();

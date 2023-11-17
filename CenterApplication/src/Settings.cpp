@@ -19,11 +19,7 @@ Settings::Settings(const std::string& pathName)
 	settings.close();
 }
 
-Settings::~Settings()
-{
-
-}
-
+// In case there are no settings saved, create default
 void Settings::WriteDefault()
 {
 	std::ofstream settingsOutput{ path };

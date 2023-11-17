@@ -3,6 +3,7 @@
 // TODO
 // Add options
 
+// Window menu
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -66,17 +67,26 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 Window::Window() : m_hInstance(GetModuleHandle(nullptr))
 {
 	// Create window class
-	WNDCLASS wc = { };
-	wc.lpfnWndProc = WindowProc;
-	wc.hInstance = m_hInstance;
-	wc.lpszClassName = CLASS_NAME;
+	WNDCLASSEX wc = { };
+	wc.cbSize = sizeof(WNDCLASSEX);									// Size, in bytes, of this structure
+	wc.lpfnWndProc = WindowProc;									// Processes messages sent to a window
+	wc.hInstance = m_hInstance;										// Class instance
+	wc.lpszClassName = CLASS_NAME;									// Class's name
+	wc.cbClsExtra = 0;												// Number of extra bytes to allocate following the window-class structure
+	wc.cbWndExtra = 0;												// Number of extra bytes to allocate following the window instance
+	wc.hIcon = LoadIcon(m_hInstance, MAKEINTRESOURCE(IDI_ICON));	// Load the icon
+	wc.hCursor = LoadCursor(m_hInstance, IDC_ARROW);				// Load the cursor
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);			// Load the background
+	wc.lpszMenuName = NULL;											// Specify the resource name of the class menu
+	wc.hIconSm = LoadIcon(m_hInstance, MAKEINTRESOURCE(IDI_ICON));	// Small icon that is associated with the window class
+
 
 	// Register window class
-	RegisterClass(&wc);
+	RegisterClassEx(&wc);
 
 	// Create the window
 	hWnd = CreateWindowEx(
-		0,                              // Optional window styles.
+		WS_EX_LEFT,                     // Optional window styles.
 		CLASS_NAME,                     // Window class
 		L"Window Recenter",             // Window text
 		WS_OVERLAPPEDWINDOW,            // Window style
